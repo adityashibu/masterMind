@@ -175,20 +175,7 @@ matches:
 
 @ show the sequence in R0, use a call to printf in libc to do the printing, a useful function when debugging 
 showseq:
-    PUSH {LR}                   @ Save the link register
-    LDR R1, =f4str              @ Load the format string for printf
-    LDR R2, [R0]                @ Load the first element of the sequence
-    LDR R3, [R0, #4]            @ Load the second element of the sequence
-    LDR R4, [R0, #8]            @ Load the third element of the sequence
-    BL printf                   @ Call printf with the format string and sequence elements as arguments
-    MOV R0, #0                  @ Load the pointer to the secret sequence
-    LDR R0, [R0]                @ Load the pointer value
-    LDR R2, [R0]                @ Load the first element of the secret sequence
-    LDR R3, [R0, #4]            @ Load the second element of the secret sequence
-    LDR R4, [R0, #8]            @ Load the third element of the secret sequence
-    BL printf                   @ Call printf again to print the secret sequence
-    POP {LR}                    @ Restore the link register
-    BX LR                       @ Return to the caller
+    @ Optional
 	
 @ =============================================================================
 

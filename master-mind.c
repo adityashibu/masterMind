@@ -850,7 +850,7 @@ int main(int argc, char *argv[])
   int c, d, buttonPressed, rel, foo;
   int *attSeq;
 
-  int greenLED = LED, redLED = LED2, pinButton = BUTTON;
+  int pinLED = LED, pin2LED2 = LED2, pinButton = BUTTON;
   int fSel, shift, pin, clrOff, setOff, off, res;
   int fd;
 
@@ -1003,9 +1003,8 @@ int main(int argc, char *argv[])
 
   // -------------------------------------------------------
   // Configuration of LED, BUTTON and LCD pins
-  // Modified by AJ & Leressa
-  pinMode(gpio, greenLED, OUTPUT);
-  pinMode(gpio, redLED, OUTPUT);
+  pinMode(gpio, pinLED, OUTPUT);
+  pinMode(gpio, pin2LED2, OUTPUT);
   pinMode(gpio, pinButton, INPUT);
   pinMode(gpio, STRB_PIN, OUTPUT);
   pinMode(gpio, RS_PIN, OUTPUT);
@@ -1146,8 +1145,8 @@ int main(int argc, char *argv[])
   // +++++ main loop
 
   // Turn LED off if was ON previous game
-  digitalWrite(gpio, greenLED, LOW);
-  digitalWrite(gpio, redLED, LOW);
+  digitalWrite(gpio, pinLED, LOW);
+  digitalWrite(gpio, pin2LED2, LOW);
 
   // Main game loop starts here, the player has 5 attempts to guess the secret sequence
   while (!found && attempts < 5)
@@ -1216,12 +1215,12 @@ int main(int argc, char *argv[])
       printf("Button pressed %d times\n", buttonPressCount);
 
       // Set redLED blink for 2 seconds to indicate the end of the time window
-      digitalWrite(gpio, redLED, HIGH);
+      digitalWrite(gpio, pin2LED2, HIGH);
       delay(2000);
-      digitalWrite(gpio, redLED, LOW);
+      digitalWrite(gpio, pin2LED2, LOW);
 
       // Blink the number of times the button was pressed on green
-      blinkN(gpio, greenLED, buttonPressCount);
+      blinkN(gpio, pinLED, buttonPressCount);
 
       // Store the number of button presses in attSeq
       attSeq[turn - 1] = buttonPressCount;
@@ -1234,7 +1233,7 @@ int main(int argc, char *argv[])
       if (turn == 3)
       {
         // blink red LED twice to indicate the end of the attempt
-        blinkN(gpio, redLED, 2);
+        blinkN(gpio, pin2LED2, 2);
         break;
       }
     }
@@ -1251,16 +1250,16 @@ int main(int argc, char *argv[])
 
     // prints exact on the lcd
     lcdClear(lcd);
-    blinkN(gpio, greenLED, exact);
+    blinkN(gpio, pinLED, exact);
     sprintf(buf, "%d exact", exact);
     lcdPosition(lcd, 1, 0);
     lcdPuts(lcd, buf);
 
     // separator
-    blinkN(gpio, redLED, 1);
+    blinkN(gpio, pin2LED2, 1);
 
     // prints approximate on the lcd
-    blinkN(gpio, greenLED, approx);
+    blinkN(gpio, pinLED, approx);
     sprintf(buf, "%d approximate", approx);
     lcdPosition(lcd, 1, 1);
     lcdPuts(lcd, buf);
@@ -1282,7 +1281,7 @@ int main(int argc, char *argv[])
         attSeq[i] = 0;
       }
     }
-    blinkN(gpio, redLED, 3);
+    blinkN(gpio, pin2LED2, 3);
 
     delay(500);
     printf("Starting next round\n");
@@ -1291,6 +1290,7 @@ int main(int argc, char *argv[])
 
   if (found)
   {
+    printf("SUCCESS\n");
     lcdPuts(lcd, "SUCCESS");
 
     // Wait for a short delay
@@ -1303,8 +1303,8 @@ int main(int argc, char *argv[])
     lcdPuts(lcd, attemptsString);
 
     // Blink green LED three times
-    digitalWrite(gpio, redLED, HIGH);
-    blinkN(gpio, greenLED, 3);
+    digitalWrite(gpio, pin2LED2, HIGH);
+    blinkN(gpio, pinLED, 3);
 
     // Delay before clearing LCD
     usleep(500000);
@@ -1315,7 +1315,7 @@ int main(int argc, char *argv[])
 
     // Clear LCD
     lcdClear(lcd);
-    writeLED(gpio, redLED, 0);
+    writeLED(gpio, pin2LED2, 0);
   }
   else
   {
@@ -1332,7 +1332,7 @@ int main(int argc, char *argv[])
 
     // Clear LCD
     lcdClear(lcd);
-    writeLED(gpio, redLED, 0);
+    writeLED(gpio, pin2LED2, 0);
   }
 
   // Free memory

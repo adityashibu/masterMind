@@ -3,7 +3,7 @@
 
 $ as  -o mm-matches.o mm-matches.s
 $ gcc -c -o testm.o testm.c
-$ gcc -o testm testm.o matches.o
+$ gcc -o testm testm.o mm-matches.o
 $ ./testm
 */
 
