@@ -23,6 +23,18 @@ $(prg): $(prg).o $(lib).o $(matches).o
 %.o:	%.s
 	$(AS) -o $@ $<
 
+# Compile mm-matches.s to mm-matches.o
+$(matches).o: $(matches).s
+	$(AS) -o $@ $<
+
+# Compile testm.c to testm.o
+$(tester).o: $(tester).c
+	$(CC) $(OPTS) -c -o $@ $<
+
+# Link testm.o with mm-matches.o to create testm
+$(tester): $(tester).o $(matches).o
+	$(CC) -o $@ $^
+
 # run the program with debug option to show secret sequence
 run:
 	sudo ./$(prg) -d
@@ -37,4 +49,3 @@ test:	$(tester)
 
 clean:
 	-rm $(prg) $(tester) cw2 *.o
-
