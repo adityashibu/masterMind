@@ -27,7 +27,6 @@
 /* ======================================================= */
 /* SECTION: includes                                       */
 /* ------------------------------------------------------- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -106,7 +105,6 @@
 
 // =======================================================
 // char data for the CGRAM, i.e. defining new characters for the display
-
 static unsigned char newChar[8] =
     {
         0b11111,
@@ -120,7 +118,6 @@ static unsigned char newChar[8] =
 };
 
 /* Constants */
-
 static const int colors = COLS;
 static const int seqlen = SEQL;
 
@@ -183,7 +180,6 @@ static int timed_out = 0;
 
 /* ------------------------------------------------------- */
 // misc prototypes
-
 int failure(int fatal, const char *message, ...);
 void waitForEnter(void);
 int waitForButton(uint32_t *gpio, int button);
@@ -235,7 +231,6 @@ void pinMode(uint32_t *gpio, int pin, int mode)
 }
 
 /* send a @value@ (LOW or HIGH) on pin number @pin@; @gpio@ is the mmaped GPIO base address */
-/* can use digitalWrite(), depending on your implementation */
 void writeLED(uint32_t *gpio, int led, int value)
 {
   pinMode(gpio, led, 1);
@@ -268,7 +263,6 @@ int readButton(uint32_t *gpio, int button)
 }
 
 /* wait for a button input on pin number @button@; @gpio@ is the mmaped GPIO base address */
-/* can use readButton(), depending on your implementation */
 int waitForButton(uint32_t *gpio, int button)
 {
   // Loop until the button is pressed
@@ -342,9 +336,8 @@ void showSeq(int *seq)
 #define NAN2 9
 
 /* counts how many entries in seq2 match entries in seq1 */
-/* returns exact and approximate matches, either both encoded in one value, */
-/* or as a pointer to a pair of values */
-int /* or int* */ countMatches(int *seq1, int *seq2)
+/* returns exact and approximate matches, encoded in a single value */
+int countMatches(int *seq1, int *seq2)
 {
   int exactMatches = 0;
   int approximateMatches = 0;
@@ -385,7 +378,7 @@ int /* or int* */ countMatches(int *seq1, int *seq2)
 }
 
 /* show the results from calling countMatches on seq1 and seq1 */
-void showMatches(int /* or int* */ code, /* only for debugging */ int *seq1, int *seq2, /* optional, to control layout */ int lcd_format)
+void showMatches(int code, int *seq1, int *seq2, int lcd_format)
 {
   /* Assuming the sequences are inputted */
   // int encodedMatches = countMatches(seq1, seq2); // exact in tens, approximate in ones
