@@ -1035,11 +1035,9 @@ int main(int argc, char *argv[])
   lcdPosition(lcd, 0, 1);
   lcdPuts(lcd, "to start");
   waitForEnter();
-  // waitForButton(gpio, pinButton);
 
   // -----------------------------------------------------------------------------
   // +++++ main loop
-
   // Turn LED off if was ON previous game
   digitalWrite(gpio, pinLED, LOW);
   digitalWrite(gpio, pin2LED2, LOW);
