@@ -1,12 +1,13 @@
-# f28hs-2023-24-cwk2-sys
+# Master-Mind (F28HS)
 
-Coursework 2 in F28HS "Hardware-Software Interface" on Systems Programming in C and ARM Assembler
+Implemented the master-mind game in C and ASM to run on an embedded system like raspberry Pi. We've compiled and tested this on a Raspberry Pi 3 Model B and it compiles successfully and passes all tests as expected.
 
 The [CW specification is here](http://www.macs.hw.ac.uk/~hwloidl/Courses/F28HS/Coursework_F28HS_CW2_2024.pdf)
 
 Use Canvas groups (People -> Groups) to **sign-up as a pair** for this pair project.
 
 Links:
+
 - You can use any machine with an installation of the `gcc` C compiler for running the C code of the game logic
 - Template for the C program: [master-mind.c](master-mind.c)
 - Template for the ARM Assembler program: [mm-matches.s](mm-matches.s)
@@ -14,12 +15,13 @@ Links:
 ## Contents
 
 This folder contains the following CW2 specification template files for the source code and for the report:
+
 - `master-mind.c` ... the main C program for the CW implementation, and most aux fcts
-- `mm-matches.s`  ... the matching function, implemented in ARM Assembler
-- `lcdBinary.c`   ... the low-level code for hardware interaction with LED, button, and LCD;
-                      this should be implemented in inline Assembler; 
-- `testm.c`       ... a testing function to test C vs Assembler implementations of the matching function
-- `test.sh`       ... a script for unit testing the matching function, using the -u option of the main prg
+- `mm-matches.s` ... the matching function, implemented in ARM Assembler
+- `lcdBinary.c` ... the low-level code for hardware interaction with LED, button, and LCD;
+  this should be implemented in inline Assembler;
+- `testm.c` ... a testing function to test C vs Assembler implementations of the matching function
+- `test.sh` ... a script for unit testing the matching function, using the -u option of the main prg
 
 ## Gitlab usage
 
@@ -38,15 +40,19 @@ You can test basic functionality by using the `testm.c` C function and the `test
 ## Building and running the application
 
 You can build the main C program (in `master-mind.c`), and the `testm.c` testing function, by typing
+
 > make all
 
 and run the Master Mind program in debug mode by typing
+
 > make run
 
 and do unit testing on the matching function
+
 > make unit
 
 or alternatively check C vs Assembler version of the matching function
+
 > make test
 
 For the Assembler part, you need to edit the `mm-matches.s` file, compile and test this version on the Raspberry Pi.
@@ -60,9 +66,11 @@ the matching lecture in the course.
 The final version of the code should be pushed to this repo, and also submitted through Canvas, together with the report and video.
 
 A test script is available to do unit-testing of the matching function. Run it like this from the command line
+
 > sh ./test.sh
 
 To test whether all tests have been successful you can do
+
 > echo $?
 
 which should print `0`.
@@ -72,6 +80,7 @@ If you picked up the `.gitlab-ci.yml` file in this repo, this test will be done 
 ## Unit testing
 
 This is an example of doing unit-testing on 2 sequences (C part only):
+
 ```
 > ./cw2 -u 121 313
 0 exact matches
@@ -79,6 +88,7 @@ This is an example of doing unit-testing on 2 sequences (C part only):
 ```
 
 The general format for the command line is as follows (see template code in `master-mind.c` for processing command line options):
+
 ```
 ./cw2 [-v] [-d] [-s] <secret sequence> [-u <sequence1> <sequence2>]
 ```
@@ -97,6 +107,6 @@ Raspberry by as shown in the Fritzing diagram below.
 You will need resistors to control the current to the LED and from the Button. You
 will also need a potentiometer to control the contrast of the LCD display.
 
-The Fritzing diagram below visualises this wiring. 
+The Fritzing diagram below visualises this wiring.
 
 ![Fritzing Diagram](fritz_CW2_2020_bb.png "Fritzing Diagram with LED and Button")
