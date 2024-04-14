@@ -49,11 +49,7 @@ int failure(int fatal, const char *message, ...);
 
 // -----------------------------------------------------------------------------
 // Functions to implement here (or directly in master-mind.c)
-
-// /* this version needs gpio as argument, because it is in a separate file */
-// void digitalWrite (uint32_t *gpio, int pin, int value) {
-//   /* ***  COMPLETE the code here, using inline Assembler  ***  */
-// }
+// void digitalWrite (uint32_t *gpio, int pin, int value);
 
 // void pinMode(uint32_t *gpio, int pin, int mode /*, int fSel, int shift */);
 
