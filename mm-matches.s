@@ -24,8 +24,6 @@ main:
 
 	@ you probably need to initialise more values here
 
-	@ ... COMPLETE THE CODE BY ADDING YOUR CODE HERE, you should use sub-routines to structure your code
-
 exit:	@MOV	 R0, R4		@ load result to output register
 	MOV 	 R7, #1		@ load system call code
 	SWI 	 0		@ return this value

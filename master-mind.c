@@ -1,7 +1,5 @@
 /*
  * MasterMind implementation: template; see comments below on which parts need to be completed
- * CW spec: https://www.macs.hw.ac.uk/~hwloidl/Courses/F28HS/F28HS_CW2_2022.pdf
- * This repo: https://gitlab-student.macs.hw.ac.uk/f28hs-2021-22/f28hs-2021-22-staff/f28hs-2021-22-cwk2-sys
 
  * Compile:
  gcc -c -o lcdBinary.o lcdBinary.c
@@ -24,21 +22,7 @@
  ***********************************************************************
  * See:
  *	https://projects.drogon.net/raspberry-pi/wiringpi/
- *
- *    wiringPi is free software: you can redistribute it and/or modify
- *    it under the terms of the GNU Lesser General Public License as published by
- *    the Free Software Foundation, either version 3 of the License, or
- *    (at your option) any later version.
- *
- *    wiringPi is distributed in the hope that it will be useful,
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *    GNU Lesser General Public License for more details.
- *
- *    You should have received a copy of the GNU Lesser General Public License
- *    along with wiringPi.  If not, see <http://www.gnu.org/licenses/>.
- ***********************************************************************
-*/
+ */
 
 /* ======================================================= */
 /* SECTION: includes                                       */
@@ -93,7 +77,6 @@
 // =======================================================
 
 // generic constants
-
 #ifndef TRUE
 #define TRUE (1 == 1)
 #define FALSE (1 == 2)
@@ -110,7 +93,6 @@
 
 // =======================================================
 // Wiring (see inlined initialisation routine)
-
 #define STRB_PIN 24
 #define RS_PIN 25
 #define DATA0_PIN 23
@@ -164,7 +146,6 @@ static int lcdControl;
 /* ***************************************************************************** */
 /* INLINED fcts from wiringPi/devLib/lcd.c: */
 // HD44780U Commands (see Fig 11, p28 of the Hitachi HD44780U datasheet)
-
 #define LCD_CLEAR 0x01
 #define LCD_HOME 0x02
 #define LCD_ENTRY 0x04
@@ -175,18 +156,15 @@ static int lcdControl;
 #define LCD_DGRAM 0x80
 
 // Bits in the entry register
-
 #define LCD_ENTRY_SH 0x01
 #define LCD_ENTRY_ID 0x02
 
 // Bits in the control register
-
 #define LCD_BLINK_CTRL 0x01
 #define LCD_CURSOR_CTRL 0x02
 #define LCD_DISPLAY_CTRL 0x04
 
 // Bits in the function register
-
 #define LCD_FUNC_F 0x04
 #define LCD_FUNC_N 0x08
 #define LCD_FUNC_DL 0x10
@@ -214,15 +192,6 @@ int waitForButton(uint32_t *gpio, int button);
 /* SECTION: hardware interface (LED, button, LCD display)  */
 /* ------------------------------------------------------- */
 /* low-level interface to the hardware */
-
-/* ********************************************************** */
-/* COMPLETE the code for all of the functions in this SECTION */
-/* Either put them in a separate file, lcdBinary.c, and use   */
-/* inline Assembler there, or use a standalone Assembler file */
-/* You can also directly implement them here (inline Asm).    */
-/* ********************************************************** */
-
-/* These are just prototypes; you need to complete the code for each function */
 
 /* send a @value@ (LOW or HIGH) on pin number @pin@; @gpio@ is the mmaped GPIO base address */
 void digitalWrite(uint32_t *gpio, int pin, int value)
