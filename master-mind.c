@@ -652,7 +652,6 @@ void lcdClear(struct lcdDataStruct *lcd)
  *	Ignore invalid locations.
  *********************************************************************************
  */
-
 void lcdPosition(struct lcdDataStruct *lcd, int x, int y)
 {
   // struct lcdDataStruct *lcd = lcds [fd] ;
@@ -673,7 +672,6 @@ void lcdPosition(struct lcdDataStruct *lcd, int x, int y)
  *	Turn the display, cursor, cursor blinking on/off
  *********************************************************************************
  */
-
 void lcdDisplay(struct lcdDataStruct *lcd, int state)
 {
   if (state)
@@ -710,7 +708,6 @@ void lcdCursorBlink(struct lcdDataStruct *lcd, int state)
  *	simple terminal here - with line wrapping, but no scrolling. Yet.
  *********************************************************************************
  */
-
 void lcdPutchar(struct lcdDataStruct *lcd, unsigned char data)
 {
   digitalWrite(gpio, lcd->rsPin, 1);
@@ -732,7 +729,6 @@ void lcdPutchar(struct lcdDataStruct *lcd, unsigned char data)
  *	Send a string to be displayed on the display
  *********************************************************************************
  */
-
 void lcdPuts(struct lcdDataStruct *lcd, const char *string)
 {
   while (*string)
@@ -742,13 +738,6 @@ void lcdPuts(struct lcdDataStruct *lcd, const char *string)
 /* ======================================================= */
 /* SECTION: aux functions for game logic                   */
 /* ------------------------------------------------------- */
-
-/* ********************************************************** */
-/* COMPLETE the code for all of the functions in this SECTION */
-/* Implement these as C functions in this file                */
-/* ********************************************************** */
-
-/* --------------------------------------------------------------------------- */
 /* interface on top of the low-level pin I/O code */
 
 /* blink the led on pin @led@, @c@ times */
@@ -767,9 +756,8 @@ void blinkN(uint32_t *gpio, int led, int c)
 /* ======================================================= */
 /* SECTION: main fct                                       */
 /* ------------------------------------------------------- */
-
 int main(int argc, char *argv[])
-{ // this is just a suggestion of some variable that you may want to use
+{
   struct lcdDataStruct *lcd;
   int bits, rows, cols;
   unsigned char func;
@@ -797,9 +785,8 @@ int main(int argc, char *argv[])
 
   // -------------------------------------------------------
   // process command-line arguments
-
   // see: man 3 getopt for docu and an example of command line parsing
-  { // see the CW spec for the intended meaning of these options
+  {
     int opt;
     while ((opt = getopt(argc, argv, "hvdus:")) != -1)
     {
@@ -920,7 +907,6 @@ int main(int argc, char *argv[])
   // -----------------------------------------------------------------------------
   // memory mapping
   // Open the master /dev/memory device
-
   if ((fd = open("/dev/mem", O_RDWR | O_SYNC | O_CLOEXEC)) < 0)
     return failure(FALSE, "setup: Unable to open /dev/mem: %s\n", strerror(errno));
 
@@ -981,24 +967,6 @@ int main(int argc, char *argv[])
     pinMode(gpio, lcd->dataPins[i], OUTPUT);
   }
   delay(35); // mS
-
-  // Gordon Henderson's explanation of this part of the init code (from wiringPi):
-  // 4-bit mode?
-  //	OK. This is a PIG and it's not at all obvious from the documentation I had,
-  //	so I guess some others have worked through either with better documentation
-  //	or more trial and error... Anyway here goes:
-  //
-  //	It seems that the controller needs to see the FUNC command at least 3 times
-  //	consecutively - in 8-bit mode. If you're only using 8-bit mode, then it appears
-  //	that you can get away with one func-set, however I'd not rely on it...
-  //
-  //	So to set 4-bit mode, you need to send the commands one nibble at a time,
-  //	the same three times, but send the command to set it into 8-bit mode those
-  //	three times, then send a final 4th command to set it into 4-bit mode, and only
-  //	then can you flip the switch for the rest of the library to work in 4-bit
-  //	mode which sends the commands as 2 x 4-bit values.
-
-  // Cool explainantion Mr. Henderson!
 
   if (bits == 4)
   {
