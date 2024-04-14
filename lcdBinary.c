@@ -55,19 +55,10 @@ int failure(int fatal, const char *message, ...);
 //   /* ***  COMPLETE the code here, using inline Assembler  ***  */
 // }
 
-// // adapted from setPinMode
-// void pinMode(uint32_t *gpio, int pin, int mode /*, int fSel, int shift */) {
-//   /* ***  COMPLETE the code here, using inline Assembler  ***  */
-// }
+// void pinMode(uint32_t *gpio, int pin, int mode /*, int fSel, int shift */);
 
-// void writeLED(uint32_t *gpio, int led, int value) {
-//   /* ***  COMPLETE the code here, using inline Assembler  ***  */
-// }
+// void writeLED(uint32_t *gpio, int led, int value);
 
-// int readButton(uint32_t *gpio, int button) {
-//   /* ***  COMPLETE the code here, using inline Assembler  ***  */
-// }
+// int readButton(uint32_t *gpio, int button);
 
-// void waitForButton(uint32_t *gpio, int button) {
-//   /* ***  COMPLETE the code here, just C no Assembler; you can use readButton ***  */
-// }
+// void waitForButton(uint32_t *gpio, int button);
