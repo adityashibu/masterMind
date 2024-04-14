@@ -445,11 +445,6 @@ int readNum(int max)
 /* timestamps needed to implement a time-out mechanism */
 static uint64_t startT, stopT;
 
-/* ********************************************************** */
-/* COMPLETE the code for all of the functions in this SECTION */
-/* Implement these as C functions in this file                */
-/* ********************************************************** */
-
 /* you may need this function in timer_handler() below  */
 /* use the libc fct gettimeofday() to implement it      */
 uint64_t timeInMicroseconds()
@@ -468,16 +463,10 @@ void timer_handler(int signum)
   uint64_t time = timeInMicroseconds();
 }
 
-/* initialise time-stamps, setup an interval timer, and install the timer_handler callback */
-void initITimer(uint64_t timeout)
-{
-}
-
 /* ======================================================= */
 /* SECTION: Aux function                                   */
 /* ------------------------------------------------------- */
 /* misc aux functions */
-
 int failure(int fatal, const char *message, ...)
 {
   va_list argp;
@@ -512,7 +501,6 @@ void waitForEnter(void)
  *	Wait for some number of milliseconds
  *********************************************************************************
  */
-
 void delay(unsigned int howLong)
 {
   struct timespec sleeper, dummy;
@@ -522,24 +510,6 @@ void delay(unsigned int howLong)
 
   nanosleep(&sleeper, &dummy);
 }
-
-/* From wiringPi code; comment by Gordon Henderson
- * delayMicroseconds:
- *	This is somewhat intersting. It seems that on the Pi, a single call
- *	to nanosleep takes some 80 to 130 microseconds anyway, so while
- *	obeying the standards (may take longer), it's not always what we
- *	want!
- *
- *	So what I'll do now is if the delay is less than 100uS we'll do it
- *	in a hard loop, watching a built-in counter on the ARM chip. This is
- *	somewhat sub-optimal in that it uses 100% CPU, something not an issue
- *	in a microcontroller, but under a multi-tasking, multi-user OS, it's
- *	wastefull, however we've no real choice )-:
- *
- *      Plan B: It seems all might not be well with that plan, so changing it
- *      to use gettimeofday () and poll on that instead...
- *********************************************************************************
- */
 
 void delayMicroseconds(unsigned int howLong)
 {
@@ -565,14 +535,12 @@ void delayMicroseconds(unsigned int howLong)
 /* SECTION: LCD functions                                  */
 /* ------------------------------------------------------- */
 /* medium-level interface functions (all in C) */
-
 /* from wiringPi:
  * strobe:
  *	Toggle the strobe (Really the "E") pin to the device.
  *	According to the docs, data is latched on the falling edge.
  *********************************************************************************
  */
-
 void strobe(const struct lcdDataStruct *lcd)
 {
 
@@ -627,7 +595,6 @@ void sendDataCmd(const struct lcdDataStruct *lcd, unsigned char data)
  *	Send a command byte to the display
  *********************************************************************************
  */
-
 void lcdPutCommand(const struct lcdDataStruct *lcd, unsigned char command)
 {
 #ifdef DEBUG
@@ -658,7 +625,6 @@ void lcdPut4Command(const struct lcdDataStruct *lcd, unsigned char command)
  *	Home the cursor or clear the screen.
  *********************************************************************************
  */
-
 void lcdHome(struct lcdDataStruct *lcd)
 {
 #ifdef DEBUG
